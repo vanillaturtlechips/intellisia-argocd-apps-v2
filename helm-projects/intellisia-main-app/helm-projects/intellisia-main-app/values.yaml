@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: intellisia-projects
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/vanillaturtlechips/argocd-apps.git
+        revision: HEAD
+        directories:
+          - path: helm-projects/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      project: default
+      source:
+        repoURL: https://github.com/vanillaturtlechips/argocd-apps.git
+        targetRevision: HEAD
+        path: base-chart
+        helm:
+          valueFiles:
+            - '../{{path}}/values.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
