@@ -1,0 +1,6 @@
+apiVersion: v2
+name: intellisia-base-chart
+description: A Helm chart for Intellisia projects
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
