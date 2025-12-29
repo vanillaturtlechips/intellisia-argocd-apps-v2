@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Release.Name }}
@@ -17,6 +17,3 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}
           ports:
             - containerPort: 3000
-          env:
-            - name: DATABASE_URL
-              value: {{ .Values.databaseUrl | quote }}
