@@ -13,6 +13,7 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+    spec:
       project: default
       source:
         repoURL: https://github.com/vanillaturtlechips/argocd-apps.git
