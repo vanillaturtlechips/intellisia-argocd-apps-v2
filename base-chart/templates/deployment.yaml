@@ -28,3 +28,10 @@ spec:
               value: "intellisia-storage-dev"
             - name: AWS_REGION
               value: "ap-northeast-2"
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: db-auth
+                  key: nextauth_secret
+            - name: NEXTAUTH_URL
+              value: "http://a7caf260a21b9433aa227d7589899a15-1108325404.ap-northeast-2.elb.amazonaws.com"
