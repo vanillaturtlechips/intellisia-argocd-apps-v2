@@ -12,6 +12,7 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      serviceAccountName: intellisia-app-sa
       containers:
         - name: app
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}
@@ -23,3 +24,7 @@ spec:
                 secretKeyRef:
                   name: db-auth
                   key: url
+            - name: S3_BUCKET_NAME
+              value: "intellisia-storage-dev"
+            - name: AWS_REGION
+              value: "ap-northeast-2"
